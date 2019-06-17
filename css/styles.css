@@ -18,6 +18,11 @@ td {
   padding: 5px;
 }
 
+th:last-child,
+td:last-child {
+  text-align: center;
+}
+
 tr:nth-child(even) {
   background: #f0f0f0;
 }

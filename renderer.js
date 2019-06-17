@@ -38,7 +38,7 @@ function buildPage() {
 }
 
 function openTab(tab) {
-  shell.openItem(remote.app.getAppPath() + '/' + tab);
+  shell.openItem(remote.app.getAppPath() + '/tabs/' + tab);
 }
 
 function buildLinks() {

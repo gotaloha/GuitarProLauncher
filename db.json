@@ -1,11 +1,19 @@
 [{
-  "title": "Testing Title One",
-  "artist": "Artist Name One",
-  "filename": "example1.txt",
-  "rating": "7"
+  "artist": "Comfortably Numb",
+  "title": "Pink Floyd",
+  "filename": "Pink_Floyd-Comfortably_Numb.txt",
+  "rating": "9",
+  "tag": "Classic Rock"
 }, {
-  "title": "Testing Title Two",
-  "artist": "Artist Name Two",
-  "filename": "example2.txt",
-  "rating": "5.5"
+  "artist": "Joe Satriani",
+  "title": "Cryin'",
+  "filename": "Joe_Satriani-Cryin.txt",
+  "rating": "8.5",
+  "tag": "Instrumental Rock"
+}, {
+  "artist": "Ludwig von Beethoven",
+  "title": "Moonlight Sonata",
+  "filename": "Ludwig_von_Beethoven-Moonlight_Sonata.txt",
+  "rating": "6",
+  "tag": "Classical"
 }]
