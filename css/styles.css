@@ -1,0 +1,27 @@
+#wrapper {
+  margin: 15px 0;
+}
+
+table {
+  border: 2px solid #d0d0d0;
+  width: 100%;
+}
+
+th {
+  background: #000066;
+  color: #fff;
+  padding: 5px;
+}
+
+td {
+  border-bottom: 1px solid #d0d0d0;
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background: #f0f0f0;
+}
+
+tr:last-of-type td {
+  border-bottom: 0;
+}

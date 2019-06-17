@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./Node_modules/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <table id="songlist"></table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.$ = window.jQuery = require('jquery');
+    require('popper.js');
+    require('bootstrap');
+  </script>
+  <script src="./renderer.js"></script>
+</body>
+
 </html>

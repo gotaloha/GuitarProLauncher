@@ -1,0 +1,11 @@
+[{
+  "title": "Testing Title One",
+  "artist": "Artist Name One",
+  "filename": "example1.txt",
+  "rating": "7"
+}, {
+  "title": "Testing Title Two",
+  "artist": "Artist Name Two",
+  "filename": "example2.txt",
+  "rating": "5.5"
+}]
