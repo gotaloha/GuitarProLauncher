@@ -3,17 +3,42 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Hello World!</title>
+  <title>Guitar Pro Song Launcher</title>
   <link rel="stylesheet" href="./css/styles.css">
-  <link rel="stylesheet" href="./Node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/font-awesome.css" />
 </head>
 
 <body>
   <div id="wrapper">
-    <div class="container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <h1>Guitar Pro Song Launcher<sup>v1.0.0</sup></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search">
+            <div class="input-group-append">
+              <button class="btn btn-success icon search" id="searchBtn" type="submit"><span
+                  class="sr-only">Search</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-12">
           <table id="songlist"></table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="searchContainer"> </div>
+          <div class="pageSizeContainer"></div>
+          <div class="paginationContainer "></div>
+          <div class="awesomeTableContiner"> </div>
         </div>
       </div>
     </div>

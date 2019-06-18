@@ -1,19 +1,29 @@
 [{
-  "artist": "Comfortably Numb",
-  "title": "Pink Floyd",
+  "index": 0,
+  "artist": "Pink Floyd",
+  "title": "Comfortably Numb",
   "filename": "Pink_Floyd-Comfortably_Numb.txt",
   "rating": "9",
   "tag": "Classic Rock"
 }, {
+  "index": 1,
   "artist": "Joe Satriani",
   "title": "Cryin'",
   "filename": "Joe_Satriani-Cryin.txt",
   "rating": "8.5",
   "tag": "Instrumental Rock"
 }, {
+  "index": 2,
   "artist": "Ludwig von Beethoven",
   "title": "Moonlight Sonata",
   "filename": "Ludwig_von_Beethoven-Moonlight_Sonata.txt",
   "rating": "6",
   "tag": "Classical"
+}, {
+  "index": 4,
+  "artist": "Pink Floyd",
+  "title": "Young Lust",
+  "filename": "Pink_Floyd-Young_Lust.txt",
+  "rating": "8.5",
+  "tag": "Classic Rock"
 }]

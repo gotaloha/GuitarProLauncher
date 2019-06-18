@@ -2,19 +2,25 @@
   margin: 15px 0;
 }
 
+h1 sup {
+  font-size: 12px;
+  top: -1.25em;
+  margin-left: 5px;
+}
+
 table {
-  border: 2px solid #d0d0d0;
+  border: 1px solid rgb(32, 73, 90);
   width: 100%;
 }
 
 th {
-  background: #000066;
+  background: rgb(32, 73, 90);
   color: #fff;
   padding: 5px;
 }
 
 td {
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid rgb(32, 73, 90);
   padding: 5px;
 }
 
@@ -23,10 +29,22 @@ td:last-child {
   text-align: center;
 }
 
-tr:nth-child(even) {
+tr:nth-child(odd) {
   background: #f0f0f0;
 }
 
 tr:last-of-type td {
   border-bottom: 0;
+}
+
+.icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.search::before {
+  font-family: "FontAwesome"; font-weight: 900; content: "\f002";
 }
