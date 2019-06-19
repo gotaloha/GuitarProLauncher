@@ -20,7 +20,6 @@ function getArtists() {
 
         function buildArtistList(item, index) {
           artists.push(item.artist);
-          console.log(artists);
         }
       } else {
         console.log("Status error: " + ajaxRequest.status);
@@ -104,7 +103,6 @@ $(function() {
     search();
   });
   $('#searchInput').on('keyup', function(e) {
-    console.log(e);
     if (e.keyCode == 13) {
       search();
     } 

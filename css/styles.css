@@ -116,10 +116,23 @@ tr:last-of-type td {
 }
 
 .autocomplete-active {
-  background-color: DodgerBlue !important; 
+  background-color: #ff6699 !important; 
   color: #ffffff; 
 }
 
-.autocomplete btn:before {
 
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(32, 73, 90);;
+  text-align: center;
+}
+
+footer p {
+  color: rgba(255,255,255,.5);
+  padding: 5px 15px;
+  margin: 0;
 }
