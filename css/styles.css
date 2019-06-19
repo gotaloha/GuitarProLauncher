@@ -1,5 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Asap+Condensed:700&display=swap');
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #303033 url(../images/tweed.png);
+}
+
+
 #wrapper {
-  margin: 15px 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: radial-gradient( circle, rgba(40, 53, 67,.5), rgb(25, 34, 44,.99) );
+}
+
+a {
+  color: #222;
+  transition: all 200ms ease-in-out;
+}
+
+a:hover,
+a:focus {
+  color: #ff2a00;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Asap Condensed', sans-serif;
+}
+
+h1 {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 900;
 }
 
 h1 sup {
@@ -9,7 +41,8 @@ h1 sup {
 }
 
 table {
-  border: 1px solid rgb(32, 73, 90);
+  border: 1px solid #fff;
+  box-shadow: 0 0 25px rgba(0,0,0,.8);
   width: 100%;
 }
 
@@ -20,13 +53,17 @@ th {
 }
 
 td {
-  border-bottom: 1px solid rgb(32, 73, 90);
+  border-bottom: 1px solid #d0d0d0;
   padding: 5px;
 }
 
 th:last-child,
 td:last-child {
   text-align: center;
+}
+
+tr {
+  background: #fff;
 }
 
 tr:nth-child(odd) {

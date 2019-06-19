@@ -22,10 +22,10 @@ function buildPage(search) {
 
         function buildNewList(item, index) {
           if (count === 0) {
-            listItem = $('<tr><th>Artist Name</th><th>Song Title</th><th>Rating</th></tr><tr><td>' + item.artist + '</td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td><td>' + item.rating + '</td></tr>');
+            listItem = $('<tr><th>Artist Name</th><th>Song Title</th><th>Rating</th></tr><tr><td><a href="#" class="artist">' + item.artist + '</a></td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td><td>' + item.rating + '</td></tr>');
             count++;
           } else {
-            listItem = $('<tr><td>' + item.artist + '</td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td><td>' + item.rating + '</td></tr>');
+            listItem = $('<tr><td><a href="#" class="artist">' + item.artist + '</a></td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td><td>' + item.rating + '</td></tr>');
           }
           $('#songlist').append(listItem);
         }
@@ -48,6 +48,12 @@ function openTab(tab) {
 }
 
 function buildLinks() {
+  $('.artist').each(function(i, obj) {
+    $(this).on('click', function(e) {
+      buildPage($(this).text());
+      e.stopPropagation();
+    });
+  });
   $('.opener').each(function(i, obj) {
     $(this).on('click', function(e) {
       openTab($(this).attr('data-tab'));
