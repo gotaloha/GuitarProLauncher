@@ -14,17 +14,27 @@
     <header>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 mt-2">
             <h1>Guitar Pro Song Launcher<sup>v1.0.0</sup></h1>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="input-group mb-3">
-              <input type="search" id="searchInput" class="form-control" placeholder="Search">
+            <div class="input-group mb-3 autocomplete">
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                  Type
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Artist</a>
+                  <a class="dropdown-item" href="#">Title</a>
+                </div>
+              </div>
+              <input type="search" id="searchInput" class="form-control" name="search" placeholder="Search">
               <div class="input-group-append">
-                <button class="btn btn-success icon search" id="searchBtn" type="submit"><span
-                    class="sr-only">Search</span></button>
+                <button class="btn btn-success icon search" id="searchBtn" type="submit">
+                  <span class="sr-only">Search</span>
+                </button>
               </div>
             </div>
           </div>
