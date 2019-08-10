@@ -1,10 +1,25 @@
 const {shell} = require('electron');
 const path = require('path');
 const {remote} = require('electron')
+//const mysql = require('mysql');
+// const connection = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'me',
+//   password: 'secret',
+//   database: 'my_db'
+// });
+
 require('popper.js');
 require('bootstrap');
 
-//var artists = ["Pink Floyd", "Joe Satriani", "Ludwig von Beethoven"];
+//connection.connect();
+
+// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+//   if (error) throw error;
+//   console.log('The solution is: ', results[0].solution);
+// });
+
+// connection.end();
 
 var artists = [];
 
@@ -32,18 +47,19 @@ function getArtists() {
   ajaxRequest.send();
 }
 
-
-
-
 function buildPage(search) {
   let ajaxRequest = new XMLHttpRequest();
+
   ajaxRequest.onreadystatechange = function() {
     if(ajaxRequest.readyState == 4) {
       if(ajaxRequest.status == 200) {
         let dataObject = JSON.parse(ajaxRequest.responseText);
         let count = 0;
         let listItem;
+
+        // Quick and dirty way to clear the previous results
         $('#songlist tr').remove();
+
         if(search) {
           let filteredRes = getObjects(dataObject,'artist',search);
           filteredRes.forEach(buildNewList);
@@ -53,10 +69,10 @@ function buildPage(search) {
 
         function buildNewList(item, index) {
           if (count === 0) {
-            listItem = $('<tr><th>Artist Name</th><th>Song Title</th><th>Rating</th></tr><tr><td><a href="#" class="artist">' + item.artist + '</a></td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td><td>' + item.rating + '</td></tr>');
+            listItem = $('<tr><th>Artist Name</th><th>Song Title</th></tr><tr><td><a href="#" class="artist">' + item.artist + '</a></td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td></tr>');
             count++;
           } else {
-            listItem = $('<tr><td><a href="#" class="artist">' + item.artist + '</a></td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td><td>' + item.rating + '</td></tr>');
+            listItem = $('<tr><td><a href="#" class="artist">' + item.artist + '</a></td><td><a href="#" class="opener" data-tab="' + item.filename + '">' + item.title + '</a></td></tr>');
           }
           $('#songlist').append(listItem);
         }
@@ -87,6 +103,7 @@ function buildLinks() {
   });
   $('.opener').each(function(i, obj) {
     $(this).on('click', function(e) {
+      console.log($(this).attr('data-tab'));
       openTab($(this).attr('data-tab'));
       e.stopPropagation();
     });
@@ -102,6 +119,7 @@ $(function() {
   $('#searchBtn').on('click', function(e) {
     search();
   });
+
   $('#searchInput').on('keyup', function(e) {
     if (e.keyCode == 13) {
       search();
@@ -112,17 +130,19 @@ $(function() {
 // Returns an array of objects according to key, value, or key and value matching
 function getObjects(obj, key, val) {
   let objects = [];
+
   for (let i in obj) {
     if (!obj.hasOwnProperty(i)) continue;
+
     if (typeof obj[i] == 'object') {
       objects = objects.concat(getObjects(obj[i], key, val));    
-    } else 
-    // If key matches and value matches or if key matches and value is not passed (eliminating the case where key matches but passed value does not)
-    if (i == key && obj[i] == val || i == key && val == '') { //
+    } else if (i == key && obj[i] == val || i == key && val == '') {
+      // If key AND value matches or if key matches and value is not passed
+      // (Eliminates the case where key matches but passed value does not)
       objects.push(obj);
-    } else if (obj[i] == val && key == ''){
+    } else if (obj[i] == val && key == '') {
       // Only add if the object is not already in the array
-      if (objects.lastIndexOf(obj) == -1){
+      if (objects.lastIndexOf(obj) == -1) {
         objects.push(obj);
       }
     }
@@ -133,6 +153,7 @@ function getObjects(obj, key, val) {
 // Returns an array of values that match on a certain key
 function getValues(obj, key) {
   let objects = [];
+
   for (let i in obj) {
     if (!obj.hasOwnProperty(i)) continue;
     if (typeof obj[i] == 'object') {
@@ -149,6 +170,7 @@ function getKeys(obj, val) {
   let objects = [];
   for (let i in obj) {
     if (!obj.hasOwnProperty(i)) continue;
+
     if (typeof obj[i] == 'object') {
       objects = objects.concat(getKeys(obj[i], val));
     } else if (obj[i] == val) {
@@ -164,90 +186,112 @@ function autocomplete(inp, arr) {
 
   inp.addEventListener('input', function(e) {
     var a, b, i, val = this.value;
-    /*close any already open lists of autocompleted values*/
+
+    /* Close any already open lists of autocompleted values */
     closeAllLists();
+
     if (!val) { return false; }
+
     currentFocus = -1;
-    /*create a DIV element that will contain the items (values):*/
+
+    /* Create a DIV element that will contain the items (values): */
     a = document.createElement('DIV');
     a.setAttribute('id', this.id + 'autocomplete-list');
     a.setAttribute('class', 'autocomplete-items');
-    /*append the DIV element as a child of the autocomplete container:*/
+
+    /* Append the DIV element as a child of the autocomplete container: */
     this.parentNode.appendChild(a);
-    /*for each item in the array...*/
+
+    /* For each item in the array... */
     for (i = 0; i < arr.length; i++) {
-      /*check if the item starts with the same letters as the text field value:*/
+      /* Check if the item starts with the same letters as the text field value: */
       if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-        /*create a DIV element for each matching element:*/
+        /* Create a DIV element for each matching element: */
         b = document.createElement('DIV');
-        /*make the matching letters bold:*/
+
+        /* Bold the matching letters: */
         b.innerHTML = '<strong>' + arr[i].substr(0, val.length) + '</strong>';
         b.innerHTML += arr[i].substr(val.length);
-        /*insert a input field that will hold the current array item's value:*/
+
+        /* Insert an input field to hold the current array item's value: */
         b.innerHTML += '<input type="hidden" value="' + arr[i] + '">';
-        /*execute a function when someone clicks on the item value (DIV element):*/
-            b.addEventListener('click', function(e) {
-            /*insert the value for the autocomplete text field:*/
-            inp.value = this.getElementsByTagName('input')[0].value;
-            /*close the list of autocompleted values,
-            (or any other open lists of autocompleted values:*/
-            closeAllLists();
+
+        /* Execute a function when someone clicks on the item value (DIV element): */
+          b.addEventListener('click', function(e) {
+
+          /* Insert the value for the autocomplete text field: */
+          inp.value = this.getElementsByTagName('input')[0].value;
+
+          /* Close the list of autocompleted values, (or any other open lists of autocompleted values: */
+          closeAllLists();
         });
+
         a.appendChild(b);
       }
     }
   });
-  /*execute a function presses a key on the keyboard:*/
+
+  /* Execute a function presses a key on the keyboard: */
   inp.addEventListener('keydown', function(e) {
-      var x = document.getElementById(this.id + 'autocomplete-list');
-      if (x) x = x.getElementsByTagName('div');
-      if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
-        currentFocus++;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
-        currentFocus--;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        /*If the ENTER key is pressed, prevent the form from being submitted,*/
-        e.preventDefault();
-        if (currentFocus > -1) {
-          /*and simulate a click on the "active" item:*/
-          if (x) x[currentFocus].click();
-        }
+    var x = document.getElementById(this.id + 'autocomplete-list');
+
+    if (x) x = x.getElementsByTagName('div');
+
+    if (e.keyCode == 40) {
+      /* If the arrow DOWN key is pressed, increase the currentFocus variable: */
+      currentFocus++;
+
+      /* Make the current item more visible: */
+      addActive(x);
+    } else if (e.keyCode == 38) {
+      /* If the arrow UP key is pressed, decrease the currentFocus variable: */
+      currentFocus--;
+
+      /* Make the current item more visible: */
+      addActive(x);
+    } else if (e.keyCode == 13) {
+      /* If the ENTER key is pressed, prevent the form from being submitted, */
+      e.preventDefault();
+
+      if (currentFocus > -1) {
+        /* Simulate a click on the "active" item: */
+        if (x) x[currentFocus].click();
       }
+    }
   });
+
   function addActive(x) {
-    /*a function to classify an item as "active":*/
+    /* Function that classifies an item as "active": */
     if (!x) return false;
-    /*start by removing the "active" class on all items:*/
+
+    /* Remove the "active" class on all items: */
     removeActive(x);
+
     if (currentFocus >= x.length) currentFocus = 0;
+
     if (currentFocus < 0) currentFocus = (x.length - 1);
-    /*add class "autocomplete-active":*/
+
+    /* Add class "autocomplete-active": */
     x[currentFocus].classList.add('autocomplete-active');
   }
+
   function removeActive(x) {
-    /*a function to remove the "active" class from all autocomplete items:*/
+    /* Function to remove the "active" class from all autocomplete items: */
     for (var i = 0; i < x.length; i++) {
       x[i].classList.remove('autocomplete-active');
     }
   }
+
   function closeAllLists(elmnt) {
-    /*close all autocomplete lists in the document,
-    except the one passed as an argument:*/
+    /* Close all autocomplete lists, except the one passed as an argument: */
     var x = document.getElementsByClassName('autocomplete-items');
+
     for (var i = 0; i < x.length; i++) {
       if (elmnt != x[i] && elmnt != inp) {
-      x[i].parentNode.removeChild(x[i]);
+        x[i].parentNode.removeChild(x[i]);
+      }
     }
   }
-}
 
   // Close the dropdown when clicked anywhere outside
   document.addEventListener('click', function (e) {

@@ -56,11 +56,11 @@ td {
   border-bottom: 1px solid #d0d0d0;
   padding: 5px;
 }
-
+/* 
 th:last-child,
 td:last-child {
   text-align: center;
-}
+} */
 
 tr {
   background: #fff;
